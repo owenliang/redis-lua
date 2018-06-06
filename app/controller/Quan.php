@@ -2,6 +2,7 @@
 namespace app\controller;
 
 use app\service\QuanService;
+use myf\Http;
 
 /**
  * Class Quan
@@ -56,5 +57,22 @@ class Quan
             return $this->response(1, '服务端异常');
         }
         return $this->response(0, '生成成功', $result);
+    }
+
+    /**
+     * 命令行循环模拟uid压测
+     */
+    public function test($quanId, $times)
+    {
+        $s = microtime(true);
+        for ($i = 0; $i < $times; ++$i) {
+            $uid = rand(0, 100000000);
+            // 某个用户抢某个优惠券
+            $result = QuanService::fetch($uid, $quanId);
+            $u = intval( (microtime(true) - $s) * 1000 * 1000)  . PHP_EOL;
+            if ($i % 10000 == 0) {
+                echo $i / (microtime(true) - $s) . PHP_EOL;
+            }
+        }
     }
 }
