@@ -1,0 +1,15 @@
+{
+    "name": "myf/app",
+    "description": "my framework app",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "owenliang",
+            "email": "120848369@qq.com"
+        }
+    ],
+    "require": {
+        "myf/core": "^1.0.0"
+    }
+}
