@@ -9,6 +9,7 @@ return [
         // 静态路由
         'static' => [
             '/quan/fetch' => ['Quan', 'fetch'],
+            '/quan/upload' => ['Quan', 'upload']
         ],
         // pcre正则路由
         'regex' => [],

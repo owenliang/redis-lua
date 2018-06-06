@@ -28,10 +28,33 @@ class Quan
             return $this->response(-1, '参数不合法');
         }
 
+        // 某个用户抢某个优惠券
         $result = QuanService::fetch($uid, $quanId);
         if (empty($result)) {
             return $this->response(1, '服务端异常');
         }
-        return $this->response(0, '请求成功', $result);
+        return $this->response($result['errno'], $result['msg'], $result['data']);
+    }
+
+    /**
+     * 模拟上传一个批次的优惠券
+     */
+    public function upload()
+    {
+        $quanId = isset($_GET['quanId']) ? $_GET['quanId'] : '';
+        $count =  isset($_GET['count']) ? $_GET['count'] : '';
+
+        if (empty($quanId) || empty($count)) {
+            return $this->response(-1, '参数不合法');
+        }
+
+        // 模拟一个批次ID，实际上应该走数据库去生成
+        $batchId = time();
+
+        $result = QuanService::upload($quanId, $batchId, $count);
+        if (empty($result)) {
+            return $this->response(1, '服务端异常');
+        }
+        return $this->response(0, '生成成功', $result);
     }
 }
